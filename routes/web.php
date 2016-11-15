@@ -37,12 +37,14 @@ Route::group(['prefix' => 'users'], function() {
 
     // Papar senarai users bagi alamat http://sistemdata.dev/users
     Route::get('/', function() {
+      // Paparkan fail template bernama senarai.php dari
+      // folder resources/views/users
       return view('users/senarai');
     });
 
     // Papar borang tambah users bagi alamat http://sistemdata.dev/users/tambah
     Route::get('tambah', function() {
-      return 'Halaman Borang Tambah User';
+      return view('users/borang_tambah');
     });
 
     // Terima data dari HTTP POST dari alamat http://sistemdata.dev/users/tambah
@@ -52,7 +54,7 @@ Route::group(['prefix' => 'users'], function() {
 
     // Papar borang edit users bagi alamat http://sistemdata.dev/users/{id}/edit
     Route::get('{id}/edit', function($id) {
-      return 'Halaman Borang Edit User ' . $id;
+      return view('users/borang_edit');
     });
 
     // Terima data dari HTTP POST dari alamat http://sistemdata.dev/users/{id}/edit
