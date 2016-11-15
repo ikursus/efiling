@@ -5,53 +5,65 @@
 <div class="row">
 <div class="col-md-12">
 <div class="panel panel-default">
-<div class="panel-heading">Borang Edit User</div>
+<div class="panel-heading">Borang Kemaskini File</div>
 <div class="panel-body">
-<form method="POST" action="{{ url('/users/tambah') }}">
-  <input type="hidden" name="_method" value="PATCH">
+<form method="POST" action="{{ url()->current() }}">
   {{ csrf_field() }}
 
   <div class="form-group">
-      <label>Username</label>
-      <input type="text" name="username" class="form-control">
+      <label>File</label>
+      <input type="file" name="nama_file">
   </div>
 
   <div class="form-group">
-      <label>Email</label>
-      <input type="email" name="email" class="form-control">
+      <label>Aktiviti</label>
+      <select name="aktiviti" class="form-control">
+        <option value="kemaskini_lokaliti">Kemaskini Lokaliti</option>
+        <option value="belah_bahagi">Belah Bahagi</option>
+      </select>
   </div>
 
   <div class="form-group">
-      <label>Nama</label>
-      <input type="text" name="nama" class="form-control">
-  </div>
-
-  <div class="form-group">
-      <label>Telefon</label>
-      <input type="text" name="phone" class="form-control">
-  </div>
-
-  <div class="form-group">
-      <label>Status</label>
-      <select name="status" class="form-control">
-        <option value="administrator">Administrator</option>
-        <option value="user">User</option>
+      <label>Tahun</label>
+      <select name="tahun" class="form-control">
+        <option value="kemaskini_lokaliti">2016</option>
       </select>
   </div>
 
   <div class="form-group">
       <label>Negeri</label>
-      <input type="text" name="negeri" class="form-control">
+      <input type="text" name="negeri" value="Putrajaya" class="form-control" readonly="readonly">
   </div>
 
   <div class="form-group">
-      <label>Unit</label>
-      <input type="text" name="unit" class="form-control">
+      <label>Sukuan</label>
+      <select name="sukuan" class="form-control">
+        <option value="s1">S1</option>
+        <option value="s2">S2</option>
+        <option value="s3">S3</option>
+        <option value="dpi">DPI</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label>Penggal</label>
+      <select name="sukuan" class="form-control">
+        <option value="bp">6 Bulan Pertama</option>
+        <option value="bt">6 Bulan Terakhir</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label>Status Belah Bahagi</label>
+      <select name="sukuan" class="form-control">
+        <option value="sebelum">Sebelum</option>
+        <option value="selepas">Selepas</option>
+      </select>
   </div>
 
   <div class="form-group">
     <button type="submit" class="btn btn-primary">
-        Simpan Data
+        Kemaskini File
     </button>
   </div>
 </form>
