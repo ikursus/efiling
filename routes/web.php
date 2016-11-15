@@ -100,6 +100,11 @@ Route::group(['prefix' => 'files'], function() {
       return 'Update data file ' . $id;
     });
 
+    // Paparkan rekod log fails
+    Route::get('{id}/logs', function($id) {
+      return view('logfile/senarai');
+    });
+
     // Hapus rekod user daripada database berdasarkan
     // alamat http://sistemdata.dev/files/{id}
     Route::delete('{id}', function($id) {
