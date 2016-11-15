@@ -12,11 +12,8 @@
 */
 
 Route::get('/', function () {
+    // laravel cari folder resources/views/welcome.blade.php
     return view('welcome');
-});
-
-Route::get('testing', function () {
-    echo 'testing';
 });
 
 Auth::routes();
@@ -40,7 +37,7 @@ Route::group(['prefix' => 'users'], function() {
 
     // Papar senarai users bagi alamat http://sistemdata.dev/users
     Route::get('/', function() {
-      return 'Senarai Users';
+      return view('users/senarai');
     });
 
     // Papar borang tambah users bagi alamat http://sistemdata.dev/users/tambah
