@@ -40,17 +40,34 @@ Route::group(['prefix' => 'users'], function() {
 
     // Papar senarai users bagi alamat http://sistemdata.dev/users
     Route::get('/', function() {
-      echo 'Senarai Users';
+      return 'Senarai Users';
     });
 
     // Papar borang tambah users bagi alamat http://sistemdata.dev/users/tambah
     Route::get('tambah', function() {
-      echo 'Halaman Borang Tambah User';
+      return 'Halaman Borang Tambah User';
     });
 
     // Terima data dari HTTP POST dari alamat http://sistemdata.dev/users/tambah
     Route::post('tambah', function() {
-      echo 'Proses data simpan ke database';
+      return 'Proses data simpan ke database';
+    });
+
+    // Papar borang edit users bagi alamat http://sistemdata.dev/users/{id}/edit
+    Route::get('{id}/edit', function($id) {
+      return 'Halaman Borang Edit User ' . $id;
+    });
+
+    // Terima data dari HTTP POST dari alamat http://sistemdata.dev/users/{id}/edit
+    // Untuk kemaskini data berdasarkan ID
+    Route::patch('{id}/edit', function($id) {
+      return 'Update data user ' . $id;
+    });
+
+    // Hapus rekod user daripada database berdasarkan
+    // alamat http://sistemdata.dev/users/{id}
+    Route::delete('{id}', function($id) {
+      return 'Berjaya delete user ' . $id;
     });
 
 });
