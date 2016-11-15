@@ -39,7 +39,11 @@ Route::group(['prefix' => 'users'], function() {
     Route::get('/', function() {
       // Paparkan fail template bernama senarai.php dari
       // folder resources/views/users
-      return view('users/senarai');
+
+      $username = '<strong>Ali</strong>';
+
+      // return view('users/senarai', array('username' => 'Ali') );
+      return view('users/senarai', compact('username') );
     });
 
     // Papar borang tambah users bagi alamat http://sistemdata.dev/users/tambah

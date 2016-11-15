@@ -17,7 +17,7 @@
   <tbody>
     <tr>
       <td>ID</td>
-      <td>Nama</td>
+      <td>{{ $username }}</td>
     </tr>
   </tbody>
 </table>
