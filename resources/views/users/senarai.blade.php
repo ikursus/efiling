@@ -7,6 +7,11 @@
 <div class="panel panel-default">
 <div class="panel-heading">Senarai Users</div>
 <div class="panel-body">
+
+<p>
+<a href="{{ url('users/tambah') }}" class="btn btn-primary">Tambah User</a>
+</p>
+
 <table class="table">
   <thead>
     <tr>

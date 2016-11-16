@@ -2,7 +2,7 @@
 // Route paparan halaman utama
 Route::get('/', function () {
     // laravel cari folder resources/views/welcome.blade.php
-    return view('welcome');
+    return view('homepage');
 });
 
 // Route login dan password reset
