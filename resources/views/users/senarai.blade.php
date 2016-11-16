@@ -12,24 +12,44 @@
 <a href="{{ url('users/tambah') }}" class="btn btn-primary">Tambah User</a>
 </p>
 
+@if ( count( $senarai_users ) )
+
 <table class="table">
   <thead>
     <tr>
       <th>ID</th>
+      <th>Username</th>
       <th>Nama</th>
+      <th>Email</th>
+      <th>Negeri</th>
+      <th>Status</th>
+      <th>Unit</th>
       <th>Tindakan</th>
     </tr>
   </thead>
   <tbody>
+
+    @foreach ( $senarai_users as $key )
     <tr>
-      <td>1</td>
-      <td>Ali Baba</td>
+      <td>{{ $key->id }}</td>
+      <td>{{ $key->username }}</td>
+      <td>{{ $key->nama }}</td>
+      <td>{{ $key->email }}</td>
+      <td>{{ $key->negeri }}</td>
+      <td>{{ $key->status }}</td>
+      <td>{{ $key->unit }}</td>
       <td>
-        <a class="btn btn-xs btn-info" href="{{ url('users/1/edit') }}">Edit</a>
+        <a class="btn btn-xs btn-info" href="{{ url('users/'.$key->id.'/edit') }}">Edit</a>
       </td>
     </tr>
+    @endforeach
+
   </tbody>
 </table>
+
+@endif
+
+
 </div>
 </div>
 </div>

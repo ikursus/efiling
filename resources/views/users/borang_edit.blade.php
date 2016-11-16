@@ -16,22 +16,22 @@
 
   <div class="form-group">
       <label>Username</label>
-      <input type="text" name="username" class="form-control">
+      <input type="text" name="username" class="form-control" value="{{ $user->username }}">
   </div>
 
   <div class="form-group">
       <label>Email</label>
-      <input type="email" name="email" class="form-control">
+      <input type="email" name="email" class="form-control" value="{{ $user->email }}">
   </div>
 
   <div class="form-group">
       <label>Nama</label>
-      <input type="text" name="nama" class="form-control">
+      <input type="text" name="nama" class="form-control" value="{{ $user->nama }}">
   </div>
 
   <div class="form-group">
       <label>Telefon</label>
-      <input type="text" name="phone" class="form-control">
+      <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
   </div>
 
   <div class="form-group">
@@ -44,12 +44,12 @@
 
   <div class="form-group">
       <label>Negeri</label>
-      <input type="text" name="negeri" class="form-control">
+      <input type="text" name="negeri" class="form-control" value="{{ $user->negeri }}">
   </div>
 
   <div class="form-group">
       <label>Unit</label>
-      <input type="text" name="unit" class="form-control">
+      <input type="text" name="unit" class="form-control" value="{{ $user->unit }}">
   </div>
 
   <div class="form-group">

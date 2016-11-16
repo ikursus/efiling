@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class UsersController extends Controller
 {
     public function index()
     {
-      $username = '<strong>Ali</strong>';
+      // Dapatkan data SEMUA users dari table users
+      $senarai_users = DB::table('users')->get();
 
-      // return view('users/senarai', array('username' => 'Ali') );
-      return view('users/senarai', compact('username') );
+      // return view('users/senarai')
+      // dan paparkan sekali result senarai_user
+      return view('users/senarai', compact('senarai_users') );
     }
 
     public function create()
@@ -40,9 +43,15 @@ class UsersController extends Controller
       dd($data);
     }
 
-    public function edit()
+    public function edit($id)
     {
-      return view('users/borang_edit');
+      // Dapatkan data dari table users
+      // berdasarkan ID yang diberi
+      $user = DB::table('users')
+      ->where('id', '=', $id)
+      ->first();
+
+      return view('users/borang_edit', compact('user') );
     }
 
     public function update( Request $request )
@@ -55,7 +64,7 @@ class UsersController extends Controller
         'negeri' => 'required',
         'unit' => 'required'
       ] );
-      
+
       // Dapatkan KESEMUA data dari borang
       $data = $request->all();
 

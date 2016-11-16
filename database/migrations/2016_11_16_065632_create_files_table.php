@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username')->unique();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('phone');
-            $table->string('status');
+            $table->string('nama_file');
+            $table->date('tahun')->nullable();
             $table->string('negeri');
-            $table->string('unit');
-            $table->rememberToken();
+            $table->string('aktiviti');
+            $table->string('sukuan');
+            $table->string('penggal');
+            $table->string('status_bb');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::dropIfExists('files');
     }
 }

@@ -11,6 +11,7 @@
 @include('layouts.errors')
 
 <form method="POST" action="{{ url('/users/tambah') }}">
+
   {{ csrf_field() }}
 
   <div class="form-group">

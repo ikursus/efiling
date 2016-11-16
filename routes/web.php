@@ -1,4 +1,12 @@
 <?php
+// check phpinfo
+Route::get('phpinfo', function() {
+
+  return phpinfo();
+
+});
+
+
 // Route paparan halaman utama
 Route::get('/', 'HomeController@index');
 
