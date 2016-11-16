@@ -17,12 +17,16 @@
     <tr>
       <th>ID</th>
       <th>Nama</th>
+      <th>Tindakan</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>ID</td>
-      <td>Nama User</td>
+      <td>1</td>
+      <td>Ali Baba</td>
+      <td>
+        <a class="btn btn-xs btn-info" href="{{ url('users/1/edit') }}">Edit</a>
+      </td>
     </tr>
   </tbody>
 </table>

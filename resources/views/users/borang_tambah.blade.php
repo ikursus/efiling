@@ -7,6 +7,9 @@
 <div class="panel panel-default">
 <div class="panel-heading">Borang Tambah User</div>
 <div class="panel-body">
+
+@include('layouts.errors')
+
 <form method="POST" action="{{ url('/users/tambah') }}">
   {{ csrf_field() }}
 

@@ -7,7 +7,10 @@
 <div class="panel panel-default">
 <div class="panel-heading">Borang Edit User</div>
 <div class="panel-body">
-<form method="POST" action="{{ url('/users/tambah') }}">
+
+@include('layouts/errors')
+
+<form method="POST" action="{{ url('/users/1/edit') }}">
   <input type="hidden" name="_method" value="PATCH">
   {{ csrf_field() }}
 

@@ -19,9 +19,25 @@ class UsersController extends Controller
       return view('users/borang_tambah');
     }
 
-    public function store()
+    public function store( Request $request )
     {
-      return 'Data berjaya disimpan ke database!';
+      // Lakukan validation terhadap input dari borang
+      // Format code $this->validate( $request, $array_rules );
+      $this->validate( $request, [
+        'username' => 'required|min:3',
+        'email' => 'required|email',
+        'nama' => 'required',
+        'status' => 'required|in:administrator,user',
+        'negeri' => 'required',
+        'unit' => 'required'
+      ] );
+
+      // Dapatkan KESEMUA data dari borang
+      $data = $request->all();
+
+      // Paparkan data dalam bentuk array
+      // return  $data;
+      dd($data);
     }
 
     public function edit()
@@ -29,12 +45,29 @@ class UsersController extends Controller
       return view('users/borang_edit');
     }
 
-    public function update()
+    public function update( Request $request )
     {
-      return 'Data berjaya dikemaskini ke database!';
+      $this->validate( $request, [
+        'username' => 'required|min:3',
+        'email' => 'required|email',
+        'nama' => 'required',
+        'status' => 'required|in:administrator,user',
+        'negeri' => 'required',
+        'unit' => 'required'
+      ] );
+      
+      // Dapatkan KESEMUA data dari borang
+      $data = $request->all();
+
+      // Paparkan data dalam bentuk array (cara 1)
+      // return $data;
+      // Paparkan data dalam bentuk array (cara 2)
+      // print_r( $data );
+      // Paparkan data dalam bentuk array (cara 3)
+      dd( $data );
     }
 
-    public function destroy()
+    public function destroy($id)
     {
       return 'Data berjaya dihapuskan dari database!';
     }

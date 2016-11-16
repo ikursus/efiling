@@ -34,7 +34,9 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        return 'Data berjaya disimpan ke dalam database';
+      $data = $request->all();
+
+      dd( $data );
     }
 
     /**
@@ -68,7 +70,9 @@ class FilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return 'Data berjaya dikemaskini ke dalam database';
+       $data = $request->all();
+
+       dd( $data );
     }
 
     /**
