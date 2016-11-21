@@ -25,6 +25,12 @@
   </div>
 
   <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="password" class="form-control">
+      <span class="help-block">Biarkan kosong jika tidak mahu tukar password.</span>
+  </div>
+
+  <div class="form-group">
       <label>Nama</label>
       <input type="text" name="nama" class="form-control" value="{{ $user->nama }}">
   </div>

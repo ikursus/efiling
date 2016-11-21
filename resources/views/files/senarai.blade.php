@@ -13,6 +13,9 @@
   </p>
 
 @if ( count( $senarai_files ) )
+
+<div class="table-responsive">
+
 <table class="table">
 
   <thead>
@@ -54,6 +57,9 @@
 
   </tbody>
 </table>
+
+</div><!--/table-responsive-->
+
 
 @endif
 </div>

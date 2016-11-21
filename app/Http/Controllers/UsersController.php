@@ -29,6 +29,7 @@ class UsersController extends Controller
       $this->validate( $request, [
         'username' => 'required|min:3',
         'email' => 'required|email',
+        'password' => 'required|min:5',
         'nama' => 'required',
         'status' => 'required|in:administrator,user',
         'negeri' => 'required',
@@ -36,11 +37,18 @@ class UsersController extends Controller
       ] );
 
       // Dapatkan KESEMUA data dari borang
-      $data = $request->all();
+      $data = $request->except('_token', 'password');
 
-      // Paparkan data dalam bentuk array
-      // return  $data;
-      dd($data);
+      // Tambah array password ke variable $data dimana
+      // Password perlu di encrypt terlebih dahulu
+      $data['password'] = bcrypt( $request->input('password') );
+
+      // Simpan data ke dalam database
+      DB::table('users')->insert( $data );
+
+      // Redirect user ke halaman senarai users
+      return redirect('users');
+
     }
 
     public function edit($id)
