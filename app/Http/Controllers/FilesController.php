@@ -65,7 +65,10 @@ class FilesController extends Controller
      */
     public function edit($id)
     {
-        return view('files/borang_edit');
+      // Query ke table files untuk dapatkan data berdasarkan ID
+      $file = DB::table('files')->where('id', '=', $id)->first();
+
+      return view('files/borang_edit', compact('file') );
     }
 
     /**
@@ -77,9 +80,15 @@ class FilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $data = $request->all();
+      // Dapatkan data daripada borang
+      // $data = $request->all();
+      $data = $request->only('aktiviti', 'sukuan', 'penggal', 'status_bb');
 
-       dd( $data );
+      // Query ke table files berdasarkan ID dan update rekod
+      $file = DB::table('files')->where('id', '=', $id)->update( $data );
+
+      // Redirect user ke halaman senarai files
+      return redirect('files');
     }
 
     /**

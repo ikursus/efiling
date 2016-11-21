@@ -39,8 +39,8 @@
       <td>{{ $key->tahun }}</td>
       <td>{{ $key->aktiviti }}</td>
       <td>{{ $key->sukuan }}</td>
-      <td>{{ $key->penggal }}</td>
-      <td>{{ $key->status_bb }}</td>
+      <td>{{ ucwords( $key->penggal ) }}</td>
+      <td>{{ ucwords( $key->status_bb ) }}</td>
       <td>
         <a href="{{ $key->nama_file }}">{{ $key->nama_display }}</a>
       </td>
