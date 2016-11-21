@@ -11,6 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+      // Arahan query untuk hapuskan REKOD DATA
+      // dalam table
+      DB::table('users')->delete();
 
       // Data demo user 1
       DB::table('users')->insert([
