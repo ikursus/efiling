@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 class FilesController extends Controller
 {
     /**
@@ -13,7 +15,12 @@ class FilesController extends Controller
      */
     public function index()
     {
-      return view('files/senarai');
+      // Query ke table Files
+      $senarai_files = DB::table('files')->orderBy('id', 'desc')->get();
+
+      // Paparkan template senarai.blade.php dan sertakan
+      // variable $senarai_files
+      return view('files/senarai', compact('senarai_files'));
     }
 
     /**
