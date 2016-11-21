@@ -40,6 +40,13 @@
       <td>{{ $key->unit }}</td>
       <td>
         <a class="btn btn-xs btn-info" href="{{ url('users/'.$key->id.'/edit') }}">Edit</a>
+
+        <form method="post" action="{{ url('users') }}/{{ $key->id }}">
+          {{ csrf_field() }}
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+        </form>
+
       </td>
     </tr>
     @endforeach

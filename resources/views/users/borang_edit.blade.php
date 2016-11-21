@@ -10,7 +10,7 @@
 
 @include('layouts/errors')
 
-<form method="POST" action="{{ url('/users/1/edit') }}">
+<form method="POST" action="{{ url()->current() }}">
   <input type="hidden" name="_method" value="PATCH">
   {{ csrf_field() }}
 

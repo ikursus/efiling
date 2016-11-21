@@ -62,7 +62,7 @@ class UsersController extends Controller
       return view('users/borang_edit', compact('user') );
     }
 
-    public function update( Request $request )
+    public function update( Request $request, $id )
     {
       $this->validate( $request, [
         'username' => 'required|min:3',
@@ -74,18 +74,29 @@ class UsersController extends Controller
       ] );
 
       // Dapatkan KESEMUA data dari borang
-      $data = $request->all();
+      $data = $request->except('_token', '_method', 'password');
 
-      // Paparkan data dalam bentuk array (cara 1)
-      // return $data;
-      // Paparkan data dalam bentuk array (cara 2)
-      // print_r( $data );
-      // Paparkan data dalam bentuk array (cara 3)
-      dd( $data );
+      // Semak adakah password perlu dikemaskini
+      // Jika field password tidak kosong, update password baru
+      if ( ! empty( $request->input('password') ) )
+      {
+        $data['password'] = bcrypt( $request->input('password') );
+      }
+
+      // Simpan rekod kemaskini ke table users berdasarkan ID user
+      DB::table('users')->where('id', '=', $id)->update( $data );
+
+      // Kembali ke halaman senarai users
+      return redirect('users');
+
     }
 
     public function destroy($id)
     {
-      return 'Data berjaya dihapuskan dari database!';
+      // Cari user berdasarkan ID dan hapuskan dari table users
+      DB::table('users')->where('id', '=', $id)->delete();
+
+      // Kembali ke senarai user
+      return redirect('users');
     }
 }

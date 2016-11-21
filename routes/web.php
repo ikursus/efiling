@@ -31,7 +31,7 @@ Route::get('/dashboard', 'HomeController@dashboard');
 
 
 // Routes group untuk prefix users
-Route::group(['prefix' => 'users'], function() {
+Route::group(['prefix' => 'users', 'middleware' => ['auth'] ], function() {
 
     // Papar senarai users bagi alamat http://sistemdata.dev/users
     Route::get('/', 'UsersController@index');
@@ -57,7 +57,7 @@ Route::group(['prefix' => 'users'], function() {
 
 
 // Routes group untuk prefix files
-Route::group(['prefix' => 'files'], function() {
+Route::group(['prefix' => 'files', 'middleware' => ['auth']], function() {
 
     // Papar senarai files bagi alamat http://sistemdata.dev/files
     Route::get('/', 'FilesController@index');

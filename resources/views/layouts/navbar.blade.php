@@ -27,13 +27,12 @@
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>
+                @else
                     <li><a href="{{ url('users') }}">Users</a></li>
                     <li><a href="{{ url('files') }}">Files</a></li>
-                @else
-
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->nama }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
