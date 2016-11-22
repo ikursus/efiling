@@ -8,6 +8,8 @@
 <div class="panel-heading">Senarai Files</div>
 <div class="panel-body">
 
+@include('layouts.errors')
+
   <p>
   <a href="{{ url('files/tambah') }}" class="btn btn-primary">Upload File</a>
   </p>
@@ -47,10 +49,18 @@
       <td>
         <a href="{{ $key->nama_file }}">{{ $key->nama_display }}</a>
       </td>
-      <td>{{ $key->user_id }}</td>
+      <td>
+        @if ( count( $key->profileUser ) )
+        {{ $key->profileUser->nama }}
+        @endif
+      </td>
       <td>
         <a class="btn btn-xs btn-info" href="{{ url('files/'.$key->id.'/edit') }}">Edit</a>
-        <a class="btn btn-xs btn-danger" href="#">Hapus</a>
+        <form method="post" action="{{ url('files') }}/{{ $key->id }}">
+          {{ csrf_field() }}
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+        </form>
       </td>
     </tr>
     @endforeach

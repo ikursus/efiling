@@ -25,4 +25,17 @@ class File extends Model
       'user_id'
 
     ];
+
+    // Function JOIN Table
+    public function profileUser()
+    {
+      return $this->belongsTo('App\User', 'user_id');
+    }
+
+
+
+
+
+
+
 }

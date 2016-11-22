@@ -24,6 +24,7 @@ class FilesController extends Controller
       // $senarai_files = DB::table('files')->orderBy('id', 'desc')->paginate(3);
       $senarai_files = File::orderBy('id', 'desc')->paginate(3);
 
+
       // Paparkan template senarai.blade.php dan sertakan
       // variable $senarai_files
       return view('files/senarai', compact('senarai_files'));
@@ -77,20 +78,21 @@ class FilesController extends Controller
         {
           $nama_baru_file = $request->input('negeri') . '_' . $request->input('aktiviti') . '_' . $request->input('penggal') . '_' . $request->input('status_bb') . '_' . Carbon::now()->toDateString() . '_' . Auth::user()->id;
           $nama_folder = date('Y') . '/' . $request->input('aktiviti') . '/' .  $request->input('penggal') . '/' . $request->input('status_bb') . '/';
-
         }
 
         // Upload
-        $upload = $request->file('nama_file')->storeAs( $nama_folder, $nama_baru_file . '.mdb' );
+        $upload = $request->file('nama_file')->storeAs( $nama_folder, $nama_baru_file . '.' . $request->file('nama_file')->extension() );
 
-        return 'success';
+        // Tambah array nama_file ke variable $data
+        $data['nama_file'] = $nama_folder . '/' . $nama_baru_file . '.' . $request->file('nama_file')->extension();
+
       }
-
       // Simpan data ke table berkaitan (files)
-      // File::create( $data );
+      File::create( $data );
 
       // Kembali ke paparan utama (senarai files)
-      // return redirect('files');
+      return redirect('files')->with('success', 'Rekod file baru berjaya diupload - ' . $nama_baru_file . '.' . $request->file('nama_file')->extension() );
+
     }
 
     /**
@@ -146,6 +148,29 @@ class FilesController extends Controller
      */
     public function destroy($id)
     {
-        return 'Data berjaya dihapuskan dari dalam database';
+      // Adakah fail yang ingin dihapuskan ini milik
+      // user yang sedang login
+      $file = File::where('id', '=', $id)
+      ->where('user_id', '=', Auth::user()->id )
+      ->first();
+
+      // Jika YA, maka hapuskan fail
+      if ( count( $file ) )
+      {
+        // Hapuskan fail
+        $file->delete();
+      }
+      elseif ( Auth::user()->status == 'administrator' )
+      {
+        // Boleh delete mana - mana fail jika admin
+        File::find($id)->delete();
+      }
+      else
+      {
+        return redirect()->back()->with('error', 'Anda tidak boleh hapuskan fail yang bukan milik sendiri.');
+      }
+
+      // Redirect user
+      return redirect('files')->with('success', 'Fail berjaya dihapuskan!');
     }
 }
