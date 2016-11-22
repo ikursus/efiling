@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
+
+use App\File;
 
 class FilesController extends Controller
 {
@@ -16,7 +19,8 @@ class FilesController extends Controller
     public function index()
     {
       // Query ke table Files
-      $senarai_files = DB::table('files')->orderBy('id', 'desc')->get();
+      // $senarai_files = DB::table('files')->orderBy('id', 'desc')->paginate(3);
+      $senarai_files = File::orderBy('id', 'desc')->paginate(3);
 
       // Paparkan template senarai.blade.php dan sertakan
       // variable $senarai_files
@@ -41,9 +45,27 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-      $data = $request->all();
+      // Validation untuk borang
+      $this->validate( $request, [
+        'nama_file' => 'required',
+        'nama_display' => 'required',
+        'tahun' => 'required|integer',
+        'negeri' => 'required',
+        'penggal' => 'required',
+        'aktiviti' => 'required',
+        'sukuan' => 'required',
+        'status_bb' => 'required',
+      ] );
 
-      dd( $data );
+      // Terima data daripada borang
+      $data = $request->all();
+      $data['user_id'] = Auth::user()->id;
+
+      // Simpan data ke table berkaitan (files)
+      File::create( $data );
+
+      // Kembali ke paparan utama (senarai files)
+      return redirect('files');
     }
 
     /**

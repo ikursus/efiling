@@ -9,13 +9,25 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    // Kalau nama table tak sama dengan nama Class Model,
+    // makluman kepada Class Model untuk berhubung dengan
+    // maklumat table yang ditetapkan di sini.
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username',
+        'nama',
+        'email',
+        'password',
+        'phone',
+        'status',
+        'negeri',
+        'unit'
     ];
 
     /**

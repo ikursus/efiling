@@ -60,6 +60,7 @@
 
 </div><!--/table-responsive-->
 
+{{ $senarai_files->links() }}
 
 @endif
 </div>

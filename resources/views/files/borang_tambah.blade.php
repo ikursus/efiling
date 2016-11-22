@@ -7,6 +7,9 @@
 <div class="panel panel-default">
 <div class="panel-heading">Borang Tambah File</div>
 <div class="panel-body">
+
+  @include('layouts.errors')
+
 <form method="POST" action="{{ url()->current() }}">
   {{ csrf_field() }}
 
@@ -14,6 +17,12 @@
       <label>File</label>
       <input type="file" name="nama_file">
   </div>
+
+  <div class="form-group">
+      <label>Nama Display</label>
+      <input type="text" name="nama_display" class="form-control" placeholder="Nama Display File">
+  </div>
+
 
   <div class="form-group">
       <label>Aktiviti</label>
@@ -26,7 +35,7 @@
   <div class="form-group">
       <label>Tahun</label>
       <select name="tahun" class="form-control">
-        <option value="kemaskini_lokaliti">2016</option>
+        <option value="2016">2016</option>
       </select>
   </div>
 
@@ -47,7 +56,7 @@
 
   <div class="form-group">
       <label>Penggal</label>
-      <select name="sukuan" class="form-control">
+      <select name="penggal" class="form-control">
         <option value="bp">6 Bulan Pertama</option>
         <option value="bt">6 Bulan Terakhir</option>
       </select>
@@ -55,7 +64,7 @@
 
   <div class="form-group">
       <label>Status Belah Bahagi</label>
-      <select name="sukuan" class="form-control">
+      <select name="status_bb" class="form-control">
         <option value="sebelum">Sebelum</option>
         <option value="selepas">Selepas</option>
       </select>

@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\User;
 
 class UsersController extends Controller
 {
     public function index()
     {
       // Dapatkan data SEMUA users dari table users
-      $senarai_users = DB::table('users')->get();
+      // $senarai_users = DB::table('users')->get();
+
+      $senarai_users = User::paginate(3);
 
       // return view('users/senarai')
       // dan paparkan sekali result senarai_user
@@ -44,7 +47,8 @@ class UsersController extends Controller
       $data['password'] = bcrypt( $request->input('password') );
 
       // Simpan data ke dalam database
-      DB::table('users')->insert( $data );
+      // DB::table('users')->insert( $data );
+      User::insert( $data );
 
       // Redirect user ke halaman senarai users
       return redirect('users');
@@ -55,9 +59,11 @@ class UsersController extends Controller
     {
       // Dapatkan data dari table users
       // berdasarkan ID yang diberi
-      $user = DB::table('users')
-      ->where('id', '=', $id)
-      ->first();
+      // $user = DB::table('users')
+      // ->where('id', '=', $id)
+      // ->first();
+      // $user = DB::table('users')->find($id);
+      $user = User::find($id);
 
       return view('users/borang_edit', compact('user') );
     }
@@ -84,7 +90,8 @@ class UsersController extends Controller
       }
 
       // Simpan rekod kemaskini ke table users berdasarkan ID user
-      DB::table('users')->where('id', '=', $id)->update( $data );
+      // DB::table('users')->where('id', '=', $id)->update( $data );
+      User::find($id)->update( $data );
 
       // Kembali ke halaman senarai users
       return redirect('users');
@@ -94,7 +101,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
       // Cari user berdasarkan ID dan hapuskan dari table users
-      DB::table('users')->where('id', '=', $id)->delete();
+      // DB::table('users')->where('id', '=', $id)->delete();
+      User::find($id)->delete();
 
       // Kembali ke senarai user
       return redirect('users');
