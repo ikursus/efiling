@@ -10,7 +10,7 @@
 
   @include('layouts.errors')
 
-<form method="POST" action="{{ url()->current() }}">
+<form method="POST" action="{{ url()->current() }}" enctype="multipart/form-data">
   {{ csrf_field() }}
 
   <div class="form-group">
@@ -27,8 +27,8 @@
   <div class="form-group">
       <label>Aktiviti</label>
       <select name="aktiviti" class="form-control">
-        <option value="kemaskini_lokaliti">Kemaskini Lokaliti</option>
-        <option value="belah_bahagi">Belah Bahagi</option>
+        <option value="KL">Kemaskini Lokaliti</option>
+        <option value="BB">Belah Bahagi</option>
       </select>
   </div>
 
@@ -47,26 +47,26 @@
   <div class="form-group">
       <label>Sukuan</label>
       <select name="sukuan" class="form-control">
-        <option value="s1">S1</option>
-        <option value="s2">S2</option>
-        <option value="s3">S3</option>
-        <option value="dpi">DPI</option>
+        <option value="S1">S1</option>
+        <option value="S2">S2</option>
+        <option value="S3">S3</option>
+        <option value="DPI">DPI</option>
       </select>
   </div>
 
   <div class="form-group">
       <label>Penggal</label>
       <select name="penggal" class="form-control">
-        <option value="bp">6 Bulan Pertama</option>
-        <option value="bt">6 Bulan Terakhir</option>
+        <option value="P1">Penggal 1</option>
+        <option value="P2">Penggal 2</option>
       </select>
   </div>
 
   <div class="form-group">
       <label>Status Belah Bahagi</label>
       <select name="status_bb" class="form-control">
-        <option value="sebelum">Sebelum</option>
-        <option value="selepas">Selepas</option>
+        <option value="SBLM">Sebelum</option>
+        <option value="SLPS">Selepas</option>
       </select>
   </div>
 

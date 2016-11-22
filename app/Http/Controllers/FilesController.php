@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 use DB;
 use Auth;
+use Carbon\Carbon;
 
 use App\File;
+
 
 class FilesController extends Controller
 {
@@ -48,7 +50,6 @@ class FilesController extends Controller
       // Validation untuk borang
       $this->validate( $request, [
         'nama_file' => 'required',
-        'nama_display' => 'required',
         'tahun' => 'required|integer',
         'negeri' => 'required',
         'penggal' => 'required',
@@ -58,14 +59,38 @@ class FilesController extends Controller
       ] );
 
       // Terima data daripada borang
-      $data = $request->all();
+      $data = $request->except('nama_file');
       $data['user_id'] = Auth::user()->id;
 
+      // Semak kewujudan fail yang diupload
+      if ( $request->hasFile('nama_file') )
+      {
+        // Tetapkan variable file untuk pegang rekod file
+        $file = $request->file('nama_file');
+
+        if ( $request->input('aktiviti') == 'kemaskini_lokaliti' )
+        {
+          $nama_baru_file = $request->input('negeri') . '_' . $request->input('aktiviti') . '_' . $request->input('sukuan') . '_' . Carbon::now()->toDateString() . '_' . Auth::user()->id;
+          $nama_folder = date('Y') . '/' . $request->input('sukuan') . '/' . $request->input('aktiviti') . '/';
+        }
+        else
+        {
+          $nama_baru_file = $request->input('negeri') . '_' . $request->input('aktiviti') . '_' . $request->input('penggal') . '_' . $request->input('status_bb') . '_' . Carbon::now()->toDateString() . '_' . Auth::user()->id;
+          $nama_folder = date('Y') . '/' . $request->input('aktiviti') . '/' .  $request->input('penggal') . '/' . $request->input('status_bb') . '/';
+
+        }
+
+        // Upload
+        $upload = $request->file('nama_file')->storeAs( $nama_folder, $nama_baru_file . '.mdb' );
+
+        return 'success';
+      }
+
       // Simpan data ke table berkaitan (files)
-      File::create( $data );
+      // File::create( $data );
 
       // Kembali ke paparan utama (senarai files)
-      return redirect('files');
+      // return redirect('files');
     }
 
     /**
