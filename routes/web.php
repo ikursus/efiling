@@ -34,7 +34,11 @@ Route::get('/dashboard', 'HomeController@dashboard');
 Route::group(['prefix' => 'users', 'middleware' => ['auth'] ], function() {
 
     // Papar senarai users bagi alamat http://sistemdata.dev/users
-    Route::get('/', 'UsersController@index');
+    // Route::get('/', 'UsersController@index');
+    Route::get('/', 'UsersDatatablesController@index');
+
+    // Request AJAX bagi senarai users
+    Route::get('datatables', 'UsersDatatablesController@datatables')->name('datatables.users');
 
     // Papar borang tambah users bagi alamat http://sistemdata.dev/users/tambah
     Route::get('tambah', 'UsersController@create');
