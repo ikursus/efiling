@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'SistemData') }}</title>
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
@@ -19,6 +20,12 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
+    <style>
+    body {
+      font-family: 'Roboto Slab', serif !important;
+    }
+    </style>
 
 @yield('header')
 
