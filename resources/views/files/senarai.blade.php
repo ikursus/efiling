@@ -2,8 +2,6 @@
 
 @section('header')
 <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 @endsection
 
 @section('content')
@@ -20,11 +18,9 @@
   <a href="{{ url('files/tambah') }}" class="btn btn-primary">Upload File</a>
   </p>
 
-@if ( count( $senarai_files ) )
-
 <div class="table-responsive">
 
-<table class="table">
+<table class="table" id="files-table">
 
   <thead>
     <tr>
@@ -37,51 +33,36 @@
       <th>Status B/B</th>
       <th>Nama File</th>
       <th>User</th>
-      <th>Tindakan</th>
     </tr>
   </thead>
-
-  <tbody>
-
-    @foreach ( $senarai_files as $key )
-    <tr>
-      <td>{{ $key->id }}</td>
-      <td>{{ $key->negeri }}</td>
-      <td>{{ $key->tahun }}</td>
-      <td>{{ $key->aktiviti }}</td>
-      <td>{{ $key->sukuan }}</td>
-      <td>{{ ucwords( $key->penggal ) }}</td>
-      <td>{{ ucwords( $key->status_bb ) }}</td>
-      <td>
-        <a href="{{ $key->nama_file }}">{{ $key->nama_display }}</a>
-      </td>
-      <td>
-        @if ( count( $key->profileUser ) )
-        {{ $key->profileUser->nama }}
-        @endif
-      </td>
-      <td>
-        <a class="btn btn-xs btn-info" href="{{ url('files/'.$key->id.'/edit') }}">Edit</a>
-        <form method="post" action="{{ url('files') }}/{{ $key->id }}">
-          {{ csrf_field() }}
-          <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-        </form>
-      </td>
-    </tr>
-    @endforeach
-
-  </tbody>
-</table>
-
-</div><!--/table-responsive-->
-
-{{ $senarai_files->links() }}
-
-@endif
 </div>
 </div>
 </div>
 </div>
 </div>
+@endsection
+
+@section('footer')
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script>
+$(function() {
+    $('#files-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! url("files/datatables") !!}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'negeri', name: 'negeri' },
+            { data: 'tahun', name: 'tahun' },
+            { data: 'aktiviti', name: 'aktiviti' },
+            { data: 'sukuan', name: 'sukuan' },
+            { data: 'penggal', name: 'penggal' },
+            { data: 'status_bb', name: 'status_bb' },
+            { data: 'nama_file', name: 'nama_file' },
+            { data: 'user_id', name: 'user_id' },
+        ]
+    });
+});
+</script>
 @endsection

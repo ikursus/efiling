@@ -64,7 +64,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth'] ], function() {
 Route::group(['prefix' => 'files', 'middleware' => ['auth']], function() {
 
     // Papar senarai files bagi alamat http://sistemdata.dev/files
-    Route::get('/', 'FilesController@index');
+    Route::get('/', 'FilesDatatablesController@index');
+
+    Route::get('datatables', 'FilesDatatablesController@datatables');
 
     // Papar borang tambah file bagi alamat http://sistemdata.dev/files/tambah
     Route::get('tambah', 'FilesController@create');
